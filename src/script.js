@@ -1,10 +1,10 @@
 // import modules
-import {addClassWithClassList} from './modules/addClassModule.js';
-import {addClass} from './modules/addClassModule.js';
+import {addClass} from './modules/addClass.js';
 
-//  New methods of Element object
+//  New methods of Element and NodeList objects
 Element.prototype.addClass = addClass;
-Element.prototype.addClassWithClassList = addClassWithClassList;
+NodeList.prototype.addClass = addClass;
+
 
 // Testing
 const body = document.body;
@@ -24,3 +24,6 @@ function returnClass() {
     return orangeText + " " + yellow;
 }
 
+document.querySelector('div').addClass('yellow');
+console.log(one.classList);
+console.log(two.classList);
