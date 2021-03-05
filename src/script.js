@@ -1,5 +1,5 @@
 // import modules
-import {addClass} from './modules/addClass.js';
+import addClass from './modules/addClass.js';
 
 //  New methods of Element and NodeList objects
 Element.prototype.addClass = addClass;
@@ -25,5 +25,5 @@ function returnClass() {
 }
 
 document.querySelector('div').addClass('yellow');
-console.log(one.classList);
-console.log(two.classList);
+console.log(one.classList.value);
+console.log(two.classList.value);

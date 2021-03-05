@@ -1,54 +1,43 @@
-export function addClass(addClassAttr) {
-
-    function addClassString(className) {
-        setClassAttribute.call(this, previousClasses + " " + className);
+const setClassAttribute = (element, classString) => {
+    const currentClass = element.getAttribute("class") || "";
+    element.setAttribute("class", `${currentClass} ${classString}`);
+  };
+  
+const addClassString = (element, className) => {
+    setClassAttribute(element, className);
+  };
+  
+const addClassArray = (element, classNames) => {
+    setClassAttribute(element, classNames.join(" "));
+  };
+  
+const addClassFunction = (element, functionClass) => {
+    addClassDependsOnAttribute(element, functionClass());
+  };
+  
+const addClassDependsOnAttribute = (element, classAttr) => {
+    switch (typeof classAttr) {
+      case "string":
+        addClassString(element, classAttr);
+        break;
+      case "object":
+        if (!Array.isArray(classAttr)) return;
+        addClassArray(element, classAttr);
+        break;
+      case "function":
+        addClassFunction(element, classAttr);
+        break;
+      default:
+        return;
     }
-
-    function addClassArray(classNames) {
-        setClassAttribute.call(this, previousClasses + " " + classNames.join(" "));
-    }
-
-    function addClassFunction(functionClass) {
-        addClassDependsOnAttribute.call(this, functionClass());
-    }   
-
-    function addClassDependsOnAttribute(classAttr) {
-        switch (typeof classAttr) {
-            case 'string':
-                addClassString.call(this, classAttr);
-                break;
-            case 'object':
-                if (!Array.isArray(classAttr)) return;
-                addClassArray.call(this, classAttr);
-                break;
-            case 'function':
-                addClassFunction.call(this, classAttr);
-                break;
-            default:
-                return;
-        }
-    }
-
-    function setClassAttribute(classString) {
-        this.setAttribute('class', classString);
-    }
-
-    let previousClasses = '';
-
+  };
+  
+export default function (addClassAttr) {
     if (this.length === undefined) {
-        if (!this.hasAttribute('class')) {
-            this.setAttribute('class', '');
-        }
-        previousClasses = this.getAttribute('class');
-        addClassDependsOnAttribute.call(this, addClassAttr);
+      addClassDependsOnAttribute(this, addClassAttr);
     } else {
-        for (let element of this) {
-            if (!element.hasAttribute('class')) {
-                element.setAttribute('class', '');
-            }
-            previousClasses += element.getAttribute('class') + ' ';
-            addClassDependsOnAttribute.call(element, addClassAttr);
-            previousClasses = '';
-        }
-    }  
-}
+      for (let element of this) {
+        addClassDependsOnAttribute(element, addClassAttr);
+      }
+    }
+  }
