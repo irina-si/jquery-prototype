@@ -43,30 +43,35 @@ const setPropertiesFromObject = (element, properties) => {
     }
 }
 
-export default function css(propertyName, optionalValue) {
-    if (optionalValue === undefined) {
-        switch (typeof propertyName) {
-            case 'string':
-                return getPropertyNameValue(this, propertyName);
-            case 'object':
-                if (!Array.isArray(propertyName)) {
-                    setPropertiesFromObject(this, propertyName);
-                } else {
-                    return getPropertyNameValuesObject(this, propertyName);
-                }
-            default:
-                return;
-        }
-    } else {
-        switch (typeof optionalValue) {
-            case 'string':
-                addValue(this, propertyName, optionalValue);
-                break;
-            case 'function':
-                addValue(this, propertyName, optionalValue());
-                break;
-            default:
-                return;
+const functionDependsOnPropertyNameType = (element, propertyName) => {
+    switch (typeof propertyName) {
+        case 'string':
+            return getPropertyNameValue(element, propertyName);
+        case 'object':
+            if (!Array.isArray(propertyName)) {
+                setPropertiesFromObject(element, propertyName);
+            } else {
+                return getPropertyNameValuesObject(element, propertyName);
             }
+        default:
+            return;
+    }
+}
+
+const functionDependsOnOptionalValueType = (element, propertyName, optionalValue) => {
+    switch (typeof optionalValue) {
+        case 'string':
+            addValue(element, propertyName, optionalValue);
+            break;
+        case 'function':
+            addValue(element, propertyName, optionalValue());
+            break;
+        default:
+            return;
         }
+}
+
+export default function css(propertyName, optionalValue) {
+    return (optionalValue === undefined) ? functionDependsOnPropertyNameType(this, propertyName) 
+                                         : functionDependsOnOptionalValueType(this, propertyName, optionalValue);
 }

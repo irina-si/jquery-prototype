@@ -21,5 +21,8 @@ function returnColor() {
 
 element1.css({"font-size": "28px"});
 document.querySelectorAll('li').css('list-style-type', 'square');
+element2.css('text-transform', 'uppercase');
+console.log(window.getComputedStyle(element2));
 console.log(document.querySelectorAll('div').css(['background-color', 'text-tranform']));
+console.log(element2.css(['background-color', 'text-transform']));
 element3.css('color', returnColor);
