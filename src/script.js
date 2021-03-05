@@ -1,5 +1,5 @@
 // import modules
-import {text} from './modules/text.js';
+import text from './modules/text.js';
 
 
 //  New methods of Element object

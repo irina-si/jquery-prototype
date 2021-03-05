@@ -1,47 +1,45 @@
-export function text(optionalArg) {
+const textWithoutArguments = (element) => {
+    if (element.length === undefined) {                 
+         return element.textContent;
+     } else {
+         let textString = '';
+         for (let item of element) {
+             textString += ` ${item.textContent}`
+         }
+         return textString;
+     };    
+}
 
-    function textWithoutArguments() {
-       if (this.length === undefined) {                 // проверяю, является ли this коллекцией
-            return this.textContent;
-        } else {
-            let textString = '';
-            for (let element of this) {
-                textString += ' ' + element.textContent;
-            }
-            return textString;
-        };    
-    }
-    
-    function textWithArguments(text) {
-        function stringifyArg(text) {
-            let stringText = '';
-            switch (typeof text) {
-                case "string":
-                    stringText = text;
-                    break;
-                case "boolean":
-                case "number":
-                    stringText = String(text);
-                    break;
-                case "function":
-                    stringText = String(text());
-                    break;
-                default:
-                    return;
-            }
-            return stringText;
+const textWithArguments = (element, text) => {
+    const newText = document.createTextNode(stringifyArg(text));
+    if (element.length === undefined) {                  
+        element.innerHTML = newText.data;
+    } else {
+        for (let item of element) {
+            item.innerHTML = newText.data;
         }
+    }; 
+}
 
-        const newText = document.createTextNode(stringifyArg(text));
-        if (this.length === undefined) {                    // проверяю, является ли this коллекцией
-            this.innerHTML = newText.data;
-        } else {
-            for (let element of this) {
-                element.innerHTML = newText.data;
-            }
-        }; 
+const stringifyArg = (text) => {
+    let stringText = '';
+    switch (typeof text) {
+        case "string":
+            stringText = text;
+            break;
+        case "boolean":
+        case "number":
+            stringText = String(text);
+            break;
+        case "function":
+            stringText = String(text());
+            break;
+        default:
+            return;
     }
+    return stringText;
+}
 
-    return (!optionalArg) ? textWithoutArguments.call(this) : textWithArguments.call(this, optionalArg);
-
+export default function text(optionalArg) {
+    return (!optionalArg) ? textWithoutArguments(this) : textWithArguments(this, optionalArg);
 }
