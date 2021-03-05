@@ -1,59 +1,58 @@
-export function css(propertyName, optionalValue) {
-    
-    function getPropertyNameValue(propertyName) {
-        if (this.length === undefined) {                 
-            return window.getComputedStyle(this)[propertyName];
-        } else {
-            for (let element of this) {
-                let propertyNameValue = window.getComputedStyle(element)[propertyName];
-                if (propertyNameValue) {
-                    return propertyNameValue;
-                }
-            }
-        };  
-    }
-
-    function getPropertyNameValuesObject(propertyNameArray) {
-        let valuesObj = {};  
-        if (this.length === undefined) {
-            for (let propName of propertyNameArray) {
-                valuesObj[propName] = window.getComputedStyle(this)[propName];
-            }  
-        } else {
-            for (let propName of propertyNameArray) {
-                valuesObj[propName] = window.getComputedStyle(this[0])[propName];
-            } 
-        }   
-        return valuesObj;   
-    } 
-
-    function addValue(propertyName, optionalValue) {
-        if (this.length === undefined) {
-            this.style[propertyName] = optionalValue; 
-        } else {
-            for (let element of this) {
-                element.style[propertyName] = optionalValue;  
-            }
-        }   
-    }
-
-    function setPropertiesFromObject(properties) {
-        for (let property in properties) {
-            if (properties.hasOwnProperty(property)) {
-                addValue.call(this, property, properties[property]);
+const getPropertyNameValue = (element, propertyName) => {
+    if (element.length === undefined) {                 
+        return window.getComputedStyle(element)[propertyName];
+    } else {
+        for (let item of element) {
+            let propertyNameValue = window.getComputedStyle(item)[propertyName];
+            if (propertyNameValue) {
+                return propertyNameValue;
             }
         }
+    };  
+}
+
+const getPropertyNameValuesObject = (element, propertyNameArray) => {
+    let valuesObj = {};  
+    if (element.length === undefined) {
+        for (let propName of propertyNameArray) {
+            valuesObj[propName] = window.getComputedStyle(element)[propName];
+        }  
+    } else {
+        for (let propName of propertyNameArray) {
+            valuesObj[propName] = window.getComputedStyle(element[0])[propName];
+        } 
+    }   
+    return valuesObj;   
+} 
+
+const addValue = (element, propertyName, optionalValue) => {
+    if (element.length === undefined) {
+        element.style[propertyName] = optionalValue; 
+    } else {
+        for (let item of element) {
+            item.style[propertyName] = optionalValue;  
+        }
+    }   
+}
+
+const setPropertiesFromObject = (element, properties) => {
+    for (let property in properties) {
+        if (properties.hasOwnProperty(property)) {
+            addValue(element, property, properties[property]);
+        }
     }
-    
+}
+
+export default function css(propertyName, optionalValue) {
     if (optionalValue === undefined) {
         switch (typeof propertyName) {
             case 'string':
-                return getPropertyNameValue.call(this, propertyName);
+                return getPropertyNameValue(this, propertyName);
             case 'object':
                 if (!Array.isArray(propertyName)) {
-                    setPropertiesFromObject.call(this, propertyName);
+                    setPropertiesFromObject(this, propertyName);
                 } else {
-                    return getPropertyNameValuesObject.call(this, propertyName);
+                    return getPropertyNameValuesObject(this, propertyName);
                 }
             default:
                 return;
@@ -61,10 +60,10 @@ export function css(propertyName, optionalValue) {
     } else {
         switch (typeof optionalValue) {
             case 'string':
-                addValue.call(this, propertyName, optionalValue);
+                addValue(this, propertyName, optionalValue);
                 break;
             case 'function':
-                addValue.call(this, propertyName, optionalValue());
+                addValue(this, propertyName, optionalValue());
                 break;
             default:
                 return;

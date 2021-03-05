@@ -1,5 +1,5 @@
 // import modules
-import {css} from './modules/css.js';
+import css from './modules/css.js';
 
 //  New methods of Element object
 Element.prototype.css = css;
