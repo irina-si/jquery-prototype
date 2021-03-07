@@ -1,53 +1,73 @@
-export function attr(attribute, optionalValue) {
-
-    function getAttributeNameValue(attrName) {
-        if (this.length === undefined) {                 // проверяю, является ли this коллекцией
-            return this.getAttribute(attrName);
-        } else {
-            for (let element of this) {
-                if (element.hasAttribute(attrName)) {
-                    return element.getAttribute(attrName);
-                };
-            }
-        };  
-    }
-
-    function addAttributesFromObject(attributes) {
-        for (let attr in attributes) {
-            if (attributes.hasOwnProperty(attr)) {
-                this.setAttribute(attr, attributes[attr]);
-            }
-        }
-    }
-
-    function addAttribute(attributeName, value) {
-        this.setAttribute(attributeName, value);
-    }
-
-    function addAttributeFromFunction(attributeName, func) {
-        this.setAttribute(attributeName, func());
-    }
-
-    if (optionalValue === undefined) {
-        switch (typeof attribute) {
-            case 'string':
-                return getAttributeNameValue.call(this, attribute);
-            case 'object':
-                addAttributesFromObject.call(this, attribute);
-                break;
-            default:
-                return;
-        }
+const getAttributeNameValue = (element, attrName) => {
+    if (element.length === undefined) {                 
+        return element.getAttribute(attrName);
     } else {
-        switch (typeof optionalValue) {
-            case 'string':
-                addAttribute.call(this, attribute, optionalValue);
-                break;
-            case 'function':
-                addAttributeFromFunction.call(this, attribute, optionalValue);
-                break;
-            default:
-                return;
+        for (let item of element) {
+            if (item.hasAttribute(attrName)) {
+                return item.getAttribute(attrName);
+            };
         }
+    };  
+}
+
+const addAttributesFromObject = (element, attributes) => {
+    for (let attr in attributes) {
+        if (attributes.hasOwnProperty(attr)) {
+            element.setAttribute(attr, attributes[attr]);
+        }
+    }
+}
+
+const addAttribute = (element, attributeName, value) => {
+    element.setAttribute(attributeName, value);
+}
+
+const addAttributeFromFunction = (element, attributeName, func) => {
+    element.setAttribute(attributeName, func());
+}
+
+const dependsOnAttributeType = (element, attribute) => {
+    switch (typeof attribute) {
+        case 'string':
+            return getAttributeNameValue(element, attribute);
+        case 'object':
+            if (element.length === undefined) {
+                addAttributesFromObject(element, attribute);
+            } else {
+                for (let item of element) {
+                    addAttributesFromObject(item, attribute);
+                }
+            }
+            break;
+        default:
+            return;
+    }
+}
+
+const dependsOnOptionalValueType = (element, attribute, optionalValue) => {
+    switch (typeof optionalValue) {
+        case 'string':
+            addAttribute(element, attribute, optionalValue);
+            break;
+        case 'function':
+            addAttributeFromFunction(element, attribute, optionalValue);
+            break;
+        default:
+            return;
+    }
+}
+
+export function attr(attribute, optionalValue) {
+    if (optionalValue === undefined) {
+        return dependsOnAttributeType(this, attribute);
+    } else {
+        if (this.length === undefined) {
+            dependsOnOptionalValueType(this, attribute, optionalValue);
+        } else {
+            for (let item of this) {
+                dependsOnOptionalValueType(item, attribute, optionalValue);
+            }
+        }
+        
     }
 }

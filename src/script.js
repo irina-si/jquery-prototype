@@ -22,4 +22,7 @@ let value = {style: 'background-color:blue;'};
 element1.attr(value);
 element2.attr('style', () => 'text-transform: uppercase;');
 console.log(document.querySelectorAll('.yellow').attr('id'));
+document.querySelectorAll('.yellow').attr('id');
+document.querySelectorAll('div').attr({style: 'margin:25px;'});
+
 
