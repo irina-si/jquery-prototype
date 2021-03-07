@@ -1,8 +1,9 @@
 // import modules
-import {appendJQ} from './modules/append.js'
+import appendJQ from './modules/append.js'
 
-//  New methods of Element object
+//  New methods of Element and Node objects
 Element.prototype.appendJQ = appendJQ;
+NodeList.prototype.appendJQ = appendJQ;
 
 // Testing
 const body = document.body;
@@ -23,5 +24,6 @@ function returnClass() {
 }
 
 element1.appendJQ(returnClass);
-element2.appendJQ(element1);
+body.appendJQ(element1);
 element3.appendJQ(['yellow', '<b>blue</b>'])
+document.querySelectorAll('div').appendJQ('FORALL', 'FORALL2');
