@@ -1,9 +1,10 @@
 // import modules
-import {removeJQ} from './modules/remove.js';
+import removeJQ from './modules/remove.js';
 
 
 //  New methods of Node object
 Node.prototype.removeJQ = removeJQ;
+NodeList.prototype.removeJQ = removeJQ;
 
 
 // Testing
@@ -18,4 +19,4 @@ element2.className = 'red orange-text';
 element3.className = 'yellow';
 
 element1.removeJQ();
-document.removeJQ('.yellow');
+document.querySelectorAll('div').removeJQ('.yellow');
