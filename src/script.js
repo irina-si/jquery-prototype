@@ -18,5 +18,5 @@ element1.className = 'red orange-text';
 element2.className = 'red orange-text';
 element3.className = 'yellow';
 
-element1.removeJQ();
-document.querySelectorAll('div').removeJQ('.yellow');
+setTimeout(() => element1.removeJQ(), 12000);
+setTimeout(() => document.querySelectorAll('div').removeJQ('.yellow'), 10000);
