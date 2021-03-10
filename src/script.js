@@ -1,4 +1,5 @@
 // import modules
+import removeJQ from './modules/remove.js';
 import childrenJQ from './modules/children.js';
 import attr from './modules/attr.js';
 import appendJQ from './modules/append.js';
@@ -17,6 +18,8 @@ Element.prototype.text = text;
 Element.prototype.css = css;
 Element.prototype.addClass = addClass;
 
+Node.prototype.removeJQ = removeJQ;
+NodeList.prototype.removeJQ = removeJQ;
 NodeList.prototype.childrenJQ = childrenJQ;
 NodeList.prototype.attr = attr;
 NodeList.prototype.appendJQ = appendJQ;
@@ -37,6 +40,13 @@ function returnColor() {
     const yellow = 'yellow';
     return yellow;
 }
+
+// remove-feature
+element1.className = 'red orange-text';
+element2.className = 'red orange-text';
+element3.className = 'yellow';
+setTimeout(() => element1.removeJQ(), 12000);
+setTimeout(() => document.querySelectorAll('div').removeJQ('.yellow'), 10000);
 
 // children-feature
 console.log(document.querySelectorAll('ul').childrenJQ());
