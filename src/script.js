@@ -116,7 +116,7 @@ element2.css('text-transform', 'uppercase');
 console.log(window.getComputedStyle(element2));
 console.log(document.querySelectorAll('div').css(['background-color', 'text-tranform']));
 console.log(element2.css(['background-color', 'text-transform']));
-element3.css('color', returnColor);
+element3.css('color', returnClass);
 
 //addClass-feature
 element1.addClass('red orange-text');
@@ -125,9 +125,3 @@ element3.addClass(returnClass);
 document.querySelector('div').addClass('yellow');
 console.log(one.classList.value);
 console.log(two.classList.value);
-function returnClass() {
-    const red = 'red';
-    const yellow = 'yellow';
-    const orangeText = 'orange-text';
-    return orangeText + " " + yellow;
-}
