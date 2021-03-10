@@ -1,4 +1,5 @@
 // import modules
+import childrenJQ from './modules/children.js';
 import attr from './modules/attr.js';
 import appendJQ from './modules/append.js';
 import clickJQ from './modules/click.js';
@@ -7,6 +8,7 @@ import css from './modules/css.js';
 import addClass from './modules/addClass.js';
 
 //  New methods of Element and Node objects
+Element.prototype.childrenJQ = childrenJQ;
 Element.prototype.attr = attr;
 Element.prototype.appendJQ = appendJQ;
 Element.prototype.clickJQ = clickJQ;
@@ -15,6 +17,7 @@ Element.prototype.text = text;
 Element.prototype.css = css;
 Element.prototype.addClass = addClass;
 
+NodeList.prototype.childrenJQ = childrenJQ;
 NodeList.prototype.attr = attr;
 NodeList.prototype.appendJQ = appendJQ;
 NodeList.prototype.clickJQ = clickJQ;
@@ -34,6 +37,10 @@ function returnColor() {
     const yellow = 'yellow';
     return yellow;
 }
+
+// children-feature
+console.log(document.querySelectorAll('ul').childrenJQ());
+console.log(document.querySelectorAll('ul').childrenJQ('.koko'));
 
 // attr-feature
 element1.className = 'red orange-text';
