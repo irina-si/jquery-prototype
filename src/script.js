@@ -1,5 +1,5 @@
 // import modules
-import {attr} from './modules/attr.js';
+import attr from './modules/attr.js';
 
 
 //  New methods of Element and NodeList objects

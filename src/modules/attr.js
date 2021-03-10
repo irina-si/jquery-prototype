@@ -57,7 +57,7 @@ const dependsOnOptionalValueType = (element, attribute, optionalValue) => {
     }
 }
 
-export function attr(attribute, optionalValue) {
+export default function attr(attribute, optionalValue) {
     if (optionalValue === undefined) {
         return dependsOnAttributeType(this, attribute);
     } else {
