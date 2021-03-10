@@ -1,5 +1,5 @@
 const removeFuncDependsOnSelector = (element, selector) => {
-    if (selector === undefined) {
+    if (!selector) {
         element.remove();
     } else {
         if (element.matches(selector)) {
