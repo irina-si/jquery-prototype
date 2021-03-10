@@ -1,4 +1,5 @@
 // import modules
+import attr from './modules/attr.js';
 import appendJQ from './modules/append.js';
 import clickJQ from './modules/click.js';
 import text from './modules/text.js';
@@ -6,6 +7,7 @@ import css from './modules/css.js';
 import addClass from './modules/addClass.js';
 
 //  New methods of Element and Node objects
+Element.prototype.attr = attr;
 Element.prototype.appendJQ = appendJQ;
 Element.prototype.clickJQ = clickJQ;
 Node.prototype.text = text;
@@ -13,6 +15,7 @@ Element.prototype.text = text;
 Element.prototype.css = css;
 Element.prototype.addClass = addClass;
 
+NodeList.prototype.attr = attr;
 NodeList.prototype.appendJQ = appendJQ;
 NodeList.prototype.clickJQ = clickJQ;
 NodeList.prototype.text = text;
@@ -31,6 +34,17 @@ function returnColor() {
     const yellow = 'yellow';
     return yellow;
 }
+
+// attr-feature
+element1.className = 'red orange-text';
+element2.className = 'red orange-text';
+element3.className = 'yellow';
+let value = {style: 'background-color:blue;'};
+element1.attr(value);
+element2.attr('style', () => 'text-transform: uppercase;');
+console.log(document.querySelectorAll('.yellow').attr('id'));
+document.querySelectorAll('.yellow').attr('id');
+document.querySelectorAll('div').attr({style: 'margin:25px;'});
 
 // append-feature
 element1.className = 'red orange-text';
