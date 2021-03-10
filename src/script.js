@@ -1,4 +1,5 @@
 // import modules
+import empty from './modules/empty.js';
 import removeJQ from './modules/remove.js';
 import childrenJQ from './modules/children.js';
 import attr from './modules/attr.js';
@@ -9,15 +10,16 @@ import css from './modules/css.js';
 import addClass from './modules/addClass.js';
 
 //  New methods of Element and Node objects
+Element.prototype.empty = empty;
 Element.prototype.childrenJQ = childrenJQ;
 Element.prototype.attr = attr;
 Element.prototype.appendJQ = appendJQ;
 Element.prototype.clickJQ = clickJQ;
-Node.prototype.text = text;
 Element.prototype.text = text;
 Element.prototype.css = css;
 Element.prototype.addClass = addClass;
 
+NodeList.prototype.empty = empty;
 Node.prototype.removeJQ = removeJQ;
 NodeList.prototype.removeJQ = removeJQ;
 NodeList.prototype.childrenJQ = childrenJQ;
@@ -25,6 +27,7 @@ NodeList.prototype.attr = attr;
 NodeList.prototype.appendJQ = appendJQ;
 NodeList.prototype.clickJQ = clickJQ;
 NodeList.prototype.text = text;
+Node.prototype.text = text;
 NodeList.prototype.css = css;
 NodeList.prototype.addClass = addClass;
 
@@ -40,6 +43,10 @@ function returnColor() {
     const yellow = 'yellow';
     return yellow;
 }
+
+// empty-feature
+setTimeout(() => document.querySelectorAll('li').empty(), 5000);
+setTimeout(() => element1.empty(), 6000);
 
 // remove-feature
 element1.className = 'red orange-text';
