@@ -3,6 +3,7 @@ import removeClass from './modules/removeClassModule.js';
 
 //  New methods of Element object
 Element.prototype.removeClass = removeClass;
+NodeList.prototype.removeClass = removeClass;
 
 // Testing
 const body = document.body;
@@ -19,11 +20,13 @@ function returnClass() {
     const red = 'red';
     const yellow = 'yellow';
     const orangeText = 'orange-text';
-    return orangeText + " " + yellow;
+    return orangeText + " " + red;
 }
 
 element3.removeClass(returnClass);
 element1.removeClass(['red', 'orange-text']);
+document.querySelectorAll('div').removeClass('yellow');
+
 
 
 

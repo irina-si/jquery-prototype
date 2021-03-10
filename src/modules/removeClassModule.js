@@ -4,14 +4,8 @@ const setClassAttribute = (element, classString) => {
 
 const setNewClassAttr = (element, classNames) => {
     let classList = (element.getAttribute("class") || '').split(' ');
-    for (let classItemToDelete of classNames) {
-            classList.forEach((item, index) => {
-                if (item === classItemToDelete) {
-                    classList[index] = "";
-                }
-            })
-        }
-    setClassAttribute(element, classList.join(' '));
+    let newClassList = classList.filter(name => !classNames.includes(name)).join(' ');
+    setClassAttribute(element, newClassList);
 }
 
 const removeClassFunction = (element, functionClass) => {
