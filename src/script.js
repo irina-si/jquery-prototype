@@ -1,4 +1,5 @@
 // import modules
+import removeClass from './modules/removeClassModule.js';
 import empty from './modules/empty.js';
 import removeJQ from './modules/remove.js';
 import childrenJQ from './modules/children.js';
@@ -9,7 +10,8 @@ import text from './modules/text.js';
 import css from './modules/css.js';
 import addClass from './modules/addClass.js';
 
-//  New methods of Element and Node objects
+// New methods of Element and Node objects
+Element.prototype.removeClass = removeClass;
 Element.prototype.empty = empty;
 Element.prototype.childrenJQ = childrenJQ;
 Element.prototype.attr = attr;
@@ -19,6 +21,7 @@ Element.prototype.text = text;
 Element.prototype.css = css;
 Element.prototype.addClass = addClass;
 
+NodeList.prototype.removeClass = removeClass;
 NodeList.prototype.empty = empty;
 Node.prototype.removeJQ = removeJQ;
 NodeList.prototype.removeJQ = removeJQ;
@@ -38,11 +41,21 @@ let element1 = document.querySelector('#one');
 let element2 = document.querySelector('#two');
 let element3 = document.querySelector('#three');
 
-function returnColor() {
+function returnClass() {
     const red = 'red';
     const yellow = 'yellow';
-    return yellow;
+    const orangeText = 'orange-text';
+    return orangeText + " " + red;
 }
+
+
+// removeclass-feature
+element1.className = 'red orange-text';
+element2.className = 'red orange-text';
+element3.className = 'yellow';
+element3.removeClass(returnClass);
+element1.removeClass(['red', 'orange-text']);
+document.querySelectorAll('div').removeClass('yellow');
 
 // empty-feature
 setTimeout(() => document.querySelectorAll('li').empty(), 5000);
