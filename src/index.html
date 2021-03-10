@@ -16,14 +16,18 @@
         .yellow {
             background-color: yellow;
         }
-        
+
+        .upper-case {
+          text-transform: uppercase;
+        }  
+      
     </style>
   </head>
   <body>
-    <div id='one'>ONE У classList есть примитивная альтернатива - свойство className, которое содержит значение атрибута class элемента.</div>
+    <div id='one' class='upper-case'>ONE У classList есть примитивная альтернатива - свойство className, которое содержит значение атрибута class элемента.</div>
     <div id='two'>TWO У classList есть примитивная альтернатива - свойство className, которое содержит значение атрибута class элемента.</div>
     <div id='three'>THREE У classList есть примитивная альтернатива - свойство className, которое содержит значение атрибута class элемента.</div>
-    <ul class="colmn">
+    <ul class="colmn" style='background-color: yellow;'>
       <li style="font-style:italic">Суши</li>  
       <li>Рыба</li>
       <li>Водросли</li>
@@ -31,7 +35,7 @@
       <li>
       Соус:
         <ul>
-          <li>Уксус</li>
+          <li class='koko'>Уксус</li>
           <li>Соль</li>
           <li>Сахар</li>
         </ul>
