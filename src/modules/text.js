@@ -1,16 +1,12 @@
-const textWithoutArguments = (element) => {
+const getTextWithoutArguments = (element) => {
     if (element.length === undefined) {                 
          return element.textContent;
      } else {
-         let textString = '';
-         for (let item of element) {
-             textString += ` ${item.textContent}`
-         }
-         return textString;
+        return Array.from(element).map(item => item.textContent).join(' ')
      };    
 }
 
-const textWithArguments = (element, text) => {
+const getTextWithArguments = (element, text) => {
     const newText = document.createTextNode(stringifyArg(text));
     if (element.length === undefined) {                  
         element.innerHTML = newText.data;
@@ -22,24 +18,19 @@ const textWithArguments = (element, text) => {
 }
 
 const stringifyArg = (text) => {
-    let stringText = '';
     switch (typeof text) {
         case "string":
-            stringText = text;
-            break;
+            return text;
         case "boolean":
         case "number":
-            stringText = String(text);
-            break;
+            return String(text);
         case "function":
-            stringText = String(text());
-            break;
+            return String(text());
         default:
             return;
     }
-    return stringText;
 }
 
 export default function text(optionalArg) {
-    return (!optionalArg) ? textWithoutArguments(this) : textWithArguments(this, optionalArg);
+    return (!optionalArg) ? getTextWithoutArguments(this) : getTextWithArguments(this, optionalArg);
 }
