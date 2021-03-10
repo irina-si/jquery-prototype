@@ -16,14 +16,11 @@ const getChildren = (element) => {
 
 const filterChildren = (element, optionalSelector) => {
     const childrenList = Array.from(getChildren(element));
-    const filteredListOfChildren = childrenList.filter((element) => {
-            return element.matches(optionalSelector);
-        });
-    return filteredListOfChildren;
+    return childrenList.filter((element) => element.matches(optionalSelector));
 }
 
 export default function childrenJQ(optionalSelector) {
-    if (optionalSelector === undefined) {
+    if (!optionalSelector) {
         return getChildren(this);
     } else {
         return filterChildren(this, optionalSelector);
