@@ -1,5 +1,5 @@
 const clickDependsOnArguments = (element, optionalOrHandler, handler) => {
-    if (optionalOrHandler === undefined) {
+    if (!optionalOrHandler) {
         let event = new Event("click");
         element.dispatchEvent(event);
     } else if (!handler) {
