@@ -1,11 +1,15 @@
 // import modules
+import text from './modules/text.js';
 import css from './modules/css.js';
 import addClass from './modules/addClass.js';
 
-//  New methods of Element object and NodeList objects
+// New methods of Element object and NodeList objects
+Node.prototype.text = text;
+Element.prototype.text = text;
 Element.prototype.css = css;
 Element.prototype.addClass = addClass;
 
+NodeList.prototype.text = text;
 NodeList.prototype.css = css;
 NodeList.prototype.addClass = addClass;
 
@@ -21,6 +25,17 @@ function returnColor() {
     const yellow = 'yellow';
     return yellow;
 }
+
+// text-feature
+element1.className = 'red orange-text';
+element2.className = 'red orange-text';
+element3.className = 'yellow';
+let i = element1.text();
+let d = document.querySelectorAll('div').text();
+console.log('element1 ' + i);
+console.log('all divs ' + d);
+element3.text(true);
+document.querySelectorAll('.red').text('HELLO'); 
 
 // css-feature
 element1.css({"font-size": "28px"});
@@ -44,6 +59,5 @@ function returnClass() {
     const orangeText = 'orange-text';
     return orangeText + " " + yellow;
 }
-
 
 
