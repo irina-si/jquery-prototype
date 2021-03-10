@@ -1,59 +1,58 @@
-export function removeClass(classAttr) {
+const setClassAttribute = (element, classString) => {
+    element.setAttribute('class', classString);
+}
 
-    function removeClassString(className) {
-        for (let classItem of className.split(" ")) {
+const removeClassString = (element, className) => {
+    let classList = (element.getAttribute("class") || '').split(' ');
+    for (let classItemToDelete of className.split(" ")) {
             classList.forEach((item, index) => {
-                if (item === classItem) {
+                if (item === classItemToDelete) {
                     classList[index] = "";
                 }
-            });
+            })
         }
-        setClassAttribute(classList.join(' '));
-    }
+    setClassAttribute(element, classList.join(' '));
+}
 
-    function removeClassArray(classNames) {
-        for (let classItem of classNames) {
+const removeClassArray = (element, classNames) => {
+    let classList = (element.getAttribute("class") || '').split(' ');
+    for (let classItemToDelete of classNames) {
             classList.forEach((item, index) => {
-                if (item === classItem) {
+                if (item === classItemToDelete) {
                     classList[index] = "";
                 }
-            });
+            })
         }
-        setClassAttribute(classList.join(' '));
+    setClassAttribute(element, classList.join(' '));
+}
+
+const removeClassFunction = (element, functionClass) => {
+    removeClassDependsOnAttribute(element, functionClass());
+}  
+
+const removeClassDependsOnAttribute = (element, classAttr) => {
+    switch (typeof classAttr) {
+        case 'string':
+            removeClassString(element, classAttr);
+            break;
+        case 'object':
+            if (!Array.isArray(classAttr)) return;
+            removeClassArray(element, classAttr);
+            break;
+        case 'function':
+            removeClassFunction(element, classAttr);
+            break;
+        default:
+            return;
     }
+}
 
-    function removeClassFunction(functionClass) {
-        removeClassDependsOnAttribute(functionClass());
-    }   
-
-    function removeClassDependsOnAttribute(classAttr) {
-        switch (typeof classAttr) {
-            case 'string':
-                removeClassString(classAttr);
-                break;
-            case 'object':
-                if (!Array.isArray(classAttr)) return;
-                removeClassArray(classAttr);
-                break;
-            case 'function':
-                removeClassFunction(classAttr);
-                break;
-            default:
-                return;
+export default function removeClass(classAttr) {
+    if (this.length === undefined) {
+        removeClassDependsOnAttribute(this, classAttr);
+      } else {
+        for (let element of this) {
+            removeClassDependsOnAttribute(element, classAttr);
         }
-    }
-
-    function setClassAttribute(classString) {
-        element.setAttribute('class', classString);
-    }
-
-    const element = this;
-
-    if (!element.hasAttribute('class')) {
-        element.setAttribute('class', '');
-    }
-
-    const classList = element.getAttribute('class').split(' ');
-
-    removeClassDependsOnAttribute(classAttr);
+      }    
 }
