@@ -2,12 +2,7 @@ const getPropertyNameValue = (element, propertyName) => {
     if (element.length === undefined) {                 
         return window.getComputedStyle(element)[propertyName];
     } else {
-        for (let item of element) {
-            let propertyNameValue = window.getComputedStyle(item)[propertyName];
-            if (propertyNameValue) {
-                return propertyNameValue;
-            }
-        }
+        return window.getComputedStyle(element[0])[propertyName];
     };  
 }
 
@@ -43,7 +38,7 @@ const setPropertiesFromObject = (element, properties) => {
     }
 }
 
-const functionDependsOnPropertyNameType = (element, propertyName) => {
+const processDependsOnPropertyNameType = (element, propertyName) => {
     switch (typeof propertyName) {
         case 'string':
             return getPropertyNameValue(element, propertyName);
@@ -58,7 +53,7 @@ const functionDependsOnPropertyNameType = (element, propertyName) => {
     }
 }
 
-const functionDependsOnOptionalValueType = (element, propertyName, optionalValue) => {
+const addValueDependsOnOptionalValueType = (element, propertyName, optionalValue) => {
     switch (typeof optionalValue) {
         case 'string':
             addValue(element, propertyName, optionalValue);
@@ -72,6 +67,6 @@ const functionDependsOnOptionalValueType = (element, propertyName, optionalValue
 }
 
 export default function css(propertyName, optionalValue) {
-    return (optionalValue === undefined) ? functionDependsOnPropertyNameType(this, propertyName) 
-                                         : functionDependsOnOptionalValueType(this, propertyName, optionalValue);
+    return (optionalValue === undefined) ? processDependsOnPropertyNameType(this, propertyName) 
+                                         : addValueDependsOnOptionalValueType(this, propertyName, optionalValue);
 }
