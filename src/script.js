@@ -1,16 +1,19 @@
 // import modules
+import appendJQ from './modules/append.js';
 import clickJQ from './modules/click.js';
 import text from './modules/text.js';
 import css from './modules/css.js';
 import addClass from './modules/addClass.js';
 
 //  New methods of Element and Node objects
+Element.prototype.appendJQ = appendJQ;
 Element.prototype.clickJQ = clickJQ;
 Node.prototype.text = text;
 Element.prototype.text = text;
 Element.prototype.css = css;
 Element.prototype.addClass = addClass;
 
+NodeList.prototype.appendJQ = appendJQ;
 NodeList.prototype.clickJQ = clickJQ;
 NodeList.prototype.text = text;
 NodeList.prototype.css = css;
@@ -22,11 +25,21 @@ const body = document.body;
 let element1 = document.querySelector('#one');
 let element2 = document.querySelector('#two');
 let element3 = document.querySelector('#three');
+
 function returnColor() {
     const red = 'red';
     const yellow = 'yellow';
     return yellow;
 }
+
+// append-feature
+element1.className = 'red orange-text';
+element2.className = 'red orange-text';
+element3.className = 'yellow';
+element1.appendJQ(returnClass);
+body.appendJQ(element1);
+element3.appendJQ(['yellow', '<b>blue</b>'])
+document.querySelectorAll('div').appendJQ('FORALL', 'FORALL2');
 
 // click-feature
 element2.clickJQ(() => alert('Hello'));
