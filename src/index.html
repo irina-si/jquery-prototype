@@ -16,13 +16,47 @@
         .yellow {
             background-color: yellow;
         }
-        
+
+        .upper-case {
+          text-transform: uppercase;
+        }  
+      
     </style>
   </head>
   <body>
-    <div id='one'>У classList есть примитивная альтернатива - свойство className, которое содержит значение атрибута class элемента.</div>
-    <div id='two'>У classList есть примитивная альтернатива - свойство className, которое содержит значение атрибута class элемента.</div>
-    <div id='three'>У classList есть примитивная альтернатива - свойство className, которое содержит значение атрибута class элемента.</div>
+    <div id='one' class='upper-case'>ONE У classList есть примитивная альтернатива - свойство className, которое содержит значение атрибута class элемента.</div>
+    <div id='two'>TWO У classList есть примитивная альтернатива - свойство className, которое содержит значение атрибута class элемента.</div>
+    <div id='three'>THREE У classList есть примитивная альтернатива - свойство className, которое содержит значение атрибута class элемента.</div>
+    <ul class="colmn" style='background-color: yellow;'>
+      <li style="font-style:italic">Суши</li>  
+      <li>Рыба</li>
+      <li>Водросли</li>
+      <li>Рис</li>
+      <li>
+      Соус:
+        <ul>
+          <li class='koko'>Уксус</li>
+          <li>Соль</li>
+          <li>Сахар</li>
+        </ul>
+    </li>
+      <li>Авокадо</li>
+      <li>
+      Инвентарь:
+        <ul>
+          <li style="font-style:italic">Приспособления</li>
+          <li>Кастрюля</li>
+          <li>"Коврик"</li>
+          <li>Нож</li>
+        </ul>
+        <ul>
+          <li style="font-style:italic">Приборы</li>
+          <li>Тарелочки</li>
+          <li>Пиалочки</li>
+          <li>Палочки</li>
+        </ul>
+    </li>
+    </ul>
     <script type="module" src="script.js"></script>
   </body>
 </html>
