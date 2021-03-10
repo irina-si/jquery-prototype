@@ -1,14 +1,17 @@
 // import modules
+import clickJQ from './modules/click.js';
 import text from './modules/text.js';
 import css from './modules/css.js';
 import addClass from './modules/addClass.js';
 
-// New methods of Element object and NodeList objects
+//  New methods of Element and Node objects
+Element.prototype.clickJQ = clickJQ;
 Node.prototype.text = text;
 Element.prototype.text = text;
 Element.prototype.css = css;
 Element.prototype.addClass = addClass;
 
+NodeList.prototype.clickJQ = clickJQ;
 NodeList.prototype.text = text;
 NodeList.prototype.css = css;
 NodeList.prototype.addClass = addClass;
@@ -19,12 +22,17 @@ const body = document.body;
 let element1 = document.querySelector('#one');
 let element2 = document.querySelector('#two');
 let element3 = document.querySelector('#three');
-
 function returnColor() {
     const red = 'red';
     const yellow = 'yellow';
     return yellow;
 }
+
+// click-feature
+element2.clickJQ(() => alert('Hello'));
+setTimeout( () => element2.clickJQ(), 0);
+document.querySelectorAll('div').clickJQ(() => alert('GoodBye'));
+document.querySelectorAll('.colmn').clickJQ({a: 'hiFromObj'}, (event) => alert(`${event.data.a}`));
 
 // text-feature
 element1.className = 'red orange-text';
@@ -59,5 +67,3 @@ function returnClass() {
     const orangeText = 'orange-text';
     return orangeText + " " + yellow;
 }
-
-
