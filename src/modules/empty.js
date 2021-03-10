@@ -1,4 +1,4 @@
-export function empty() {
+export default function empty() {
     if (this.length === undefined) {
         this.innerHTML = '';     
     } else {

@@ -1,5 +1,5 @@
 // import modules
-import {empty} from './modules/empty.js';
+import empty from './modules/empty.js';
 
 //  New methods of Element and Node objects
 Element.prototype.empty = empty;
@@ -13,5 +13,6 @@ let element1 = document.querySelector('#one');
 let element2 = document.querySelector('#two');
 let element3 = document.querySelector('#three');
 
-document.querySelectorAll('li').empty();
-element1.empty();
+setTimeout(() => document.querySelectorAll('li').empty(), 5000);
+setTimeout(() => element1.empty(), 6000);
+
